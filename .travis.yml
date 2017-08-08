@@ -8,6 +8,7 @@ apt:
   packages:
     - google-chrome-stable
     - google-chrome-beta
+    - docker-ce
 
 language: node_js
 node_js:
