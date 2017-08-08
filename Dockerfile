@@ -1,4 +1,4 @@
-FROM node:6.11.2-alpine as builder
+FROM node:8-alpine as builder
 RUN apk update
 RUN npm install -g @angular/cli
 
