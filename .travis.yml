@@ -12,13 +12,14 @@ apt:
 language: node_js
 node_js:
   - "node"
+  - "8"
   - "7"
   - "6"
 
 jobs:
   include:
     - stage: docker push
-      node_js: 7
+      node_js: 8
       script:
         - docker build -t rightstuff/inv-ui .
         - if [ "$TRAVIS_BRANCH" == "master" ]; then
