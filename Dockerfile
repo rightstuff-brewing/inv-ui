@@ -1,6 +1,5 @@
-FROM node:8-alpine as builder
-RUN apk update
-RUN npm install -g @angular/cli
+FROM node:8 as builder
+RUN apt-get update
 
 WORKDIR /app
 
@@ -10,7 +9,10 @@ RUN npm install
 
 # Copy rest of app and build
 COPY . .
-RUN ng build -prod
+RUN npm run build
+RUN npm run test-single
+RUN npm run build-prod
+
 
 FROM nginx
 # Configure for angular fallback routes

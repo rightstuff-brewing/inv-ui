@@ -1,7 +1,7 @@
 podTemplate(cloud: 'local cluster', label: 'node-k8s', containers: [
     containerTemplate(
         name: 'node',
-        image: 'node:8-alpine',
+        image: 'node:8',
         ttyEnabled: true, 
         command: 'cat',
         volumes: [
@@ -13,20 +13,25 @@ podTemplate(cloud: 'local cluster', label: 'node-k8s', containers: [
             checkout scm
 
             stage('Setup Environment') {
-                sh 'apk update'
-                sh 'npm install -g @angular/cli'
-            }
+                sh 'apt-get update -y'
 
-            stage('Install dependencies') {
-                sh 'npm install'
+                // Install tools
+                sh 'apt-get install -y apt-transport-https ca-certificates curl software-properties-common'
+
+                // Install docker 
+                sh 'curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -'
+                sh 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"'
+
+                sh 'apt-get update -y'
+                sh 'apt-get install -y docker-ce'
             }
 
             stage('Build dev') {
-                sh 'ng build'
+                sh 'npm run build'
             }
 
-            stage('Build prod') {
-                sh 'ng build -prod'
+            stage('Test') {
+                sh 'npm run test-single'
             }
 
             stage('Build docker') {
