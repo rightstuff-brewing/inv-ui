@@ -29,7 +29,7 @@ podTemplate(cloud: 'local cluster', label: 'node-k8s',
                     def imageTag = "${baseImageTag}.${env.BUILD_NUMBER}"
                     sh 'npm run build-prod'
                     sh "DOCKER_API_VERSION=1.23 docker build -t ${imageTag} ."
-                    sh 'DOCKER_API_VERSION=1.23 gcloud docker -- push ${imageTag}'
+                    sh "DOCKER_API_VERSION=1.23 gcloud docker -- push ${imageTag}"
                 }
             }
         }
