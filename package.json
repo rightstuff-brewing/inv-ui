@@ -8,7 +8,7 @@
     "build": "ng build",
     "build-prod": "ng build -prod",
     "test": "ng test",
-    "test-single": "ng test --single-run --browsers PhantomJS",
+    "test-single": "ng test --single-run --browsers PhantomJS --colors false",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
