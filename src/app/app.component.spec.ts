@@ -1,13 +1,17 @@
 import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
+import { CurrentInventoryComponent } from './current-inventory/current-inventory.component';
+import { VendorPricingComponent } from './vendor-pricing/vendor-pricing.component';
 import { SharedModule } from './shared/shared.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        CurrentInventoryComponent,
+        VendorPricingComponent
       ],
       imports: [ SharedModule ]
     }).compileComponents();
