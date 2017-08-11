@@ -35,3 +35,7 @@ podTemplate(cloud: 'local cluster', label: 'node-k8s',
         }
     }
 }
+
+stage('Deploy') {
+    build '../inv/master'
+}
