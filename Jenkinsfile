@@ -1,5 +1,8 @@
+def projectName = 'rightstuff-176212';
+def imageName = "gcr.io/${projectName}/jenkins-slave:node.master";
+
 podTemplate(cloud: 'local cluster', label: 'node-k8s', 
-    containers: [containerTemplate(name: 'node', image: 'node:8', ttyEnabled: true, command: 'cat')],
+    containers: [containerTemplate(name: 'node', image: imageName, ttyEnabled: true, command: 'cat')],
     volumes: [
             hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'),
     ]
@@ -7,11 +10,6 @@ podTemplate(cloud: 'local cluster', label: 'node-k8s',
     node('node-k8s') {
         container('node') {
             checkout scm
-
-            stage('Setup Environment') {
-                // Install tools
-                sh 'curl -fsSL https://get.docker.com/ | sh'
-            }
 
             stage('Install dependencies') {
                 sh 'npm install'
