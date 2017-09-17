@@ -23,6 +23,17 @@ podTemplate(cloud: 'local cluster', label: 'node-k8s',
                 stage('Test') {
                     sh 'CI=true npm run test:ci'
                     sh 'python tools/lcov_cobertura.py test/coverage/lcov.info --base-dir src/ --output test/coverage/coverage.xml'
+                    junit 'test/junit.xml'
+                    step([$class: 'CoberturaPublisher', 
+                        autoUpdateHealth: false,
+                        autoUpdateStability: false,
+                        coberturaReportFile: 'test/coverage/coverage.xml',
+                        failUnhealthy: false,
+                        failUnstable: false,
+                        maxNumberOfBuilds: 0,
+                        onlyStable: false,
+                        sourceEncoding: 'ASCII',
+                        zoomCoverageChart: false])
                 }
             }
         }
