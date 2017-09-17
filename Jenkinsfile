@@ -21,7 +21,8 @@ podTemplate(cloud: 'local cluster', label: 'node-k8s',
                 }
 
                 stage('Test') {
-                    sh 'CI=true npm test'
+                    sh 'CI=true npm test:ci'
+                    sh 'python tools/lcov_cobertura.py test/coverage/lcov.info --base-dir src/ --output test/coverage/coverage.xml'
                 }
             }
         }

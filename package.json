@@ -11,6 +11,21 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "test:ci": "react-scripts test --env=jsdom --testResultsProcessor ./node_modules/jest-junit --coverage --coverageDirectory=test/coverage",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "jest-junit": "^3.0.0"
+  },
+  "jest": {
+    "coverageReporters": ["lcov", "text"]
+  },
+  "jest-junit": {
+    "suiteName": "jest tests",
+    "output": "test/junit.xml",
+    "classNameTemplate": "{classname} - {title}",
+    "titleTemplate": "{classname} - {title}",
+    "ancestorSeparator": " > ",
+    "usePathForSuiteName": "true"
   }
 }
