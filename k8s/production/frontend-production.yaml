@@ -8,7 +8,7 @@ spec:
     metadata:
       name: frontend
       labels:
-        app: gceme
+        app: inv
         role: frontend
         env: production
     spec:
