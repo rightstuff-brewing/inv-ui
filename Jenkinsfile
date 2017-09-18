@@ -37,7 +37,7 @@ podTemplate(cloud: 'local cluster', label: 'node-k8s',
                 }
 
                 stage('Build docker') {
-                    def baseImageTag = "gcr.io/${projectName}/inv-ui:${env.BRANCH_NAME}"
+                    def baseImageTag = "gcr.io/${projectName}/inv-ui:${env.BRANCH_NAME.replace("/", "-")}"
                     def imageTag = "${baseImageTag}.${env.BUILD_NUMBER}"
                     sh "DOCKER_API_VERSION=1.23 docker build -t ${imageTag} ."
                     sh "DOCKER_API_VERSION=1.23 gcloud docker -- push ${imageTag}"
