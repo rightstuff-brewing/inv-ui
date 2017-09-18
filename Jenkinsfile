@@ -16,18 +16,29 @@ podTemplate(cloud: 'local cluster', label: 'node-k8s',
                     sh 'npm install'
                 }
 
-                stage('Build dev') {
+                stage('Build') {
                     sh 'npm run build'
                 }
 
                 stage('Test') {
-                    sh 'npm run test-single'
+                    sh 'CI=true npm run test:ci'
+                    sh 'python tools/lcov_cobertura.py test/coverage/lcov.info --base-dir src/ --output test/coverage/coverage.xml'
+                    junit 'test/junit.xml'
+                    step([$class: 'CoberturaPublisher', 
+                        autoUpdateHealth: false,
+                        autoUpdateStability: false,
+                        coberturaReportFile: 'test/coverage/coverage.xml',
+                        failUnhealthy: false,
+                        failUnstable: false,
+                        maxNumberOfBuilds: 0,
+                        onlyStable: false,
+                        sourceEncoding: 'ASCII',
+                        zoomCoverageChart: false])
                 }
 
                 stage('Build docker') {
-                    def baseImageTag = "gcr.io/${projectName}/inv-ui:${env.BRANCH_NAME}"
+                    def baseImageTag = "gcr.io/${projectName}/inv-ui:${env.BRANCH_NAME.replace("/", "-")}"
                     def imageTag = "${baseImageTag}.${env.BUILD_NUMBER}"
-                    sh 'npm run build-prod'
                     sh "DOCKER_API_VERSION=1.23 docker build -t ${imageTag} ."
                     sh "DOCKER_API_VERSION=1.23 gcloud docker -- push ${imageTag}"
                     sh "DOCKER_API_VERSION=1.23 docker tag ${imageTag} ${baseImageTag}"
@@ -39,5 +50,5 @@ podTemplate(cloud: 'local cluster', label: 'node-k8s',
 }
 
 stage('Deploy') {
-    build '../inv/master'
+    build 'rightstuff-brewing/inv/master'
 }
