@@ -50,5 +50,5 @@ podTemplate(cloud: 'local cluster', label: 'node-k8s',
 }
 
 stage('Deploy') {
-    build 'rightstuff-brewing/inv'
+    build 'rightstuff-brewing/inv/master'
 }
