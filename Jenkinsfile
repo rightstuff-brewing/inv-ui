@@ -42,8 +42,6 @@ podTemplate(cloud: 'local cluster', label: 'node-k8s',
                 stage('Build docker') {
                     sh "DOCKER_API_VERSION=1.23 docker build -t ${imageTag} ."
                     sh "DOCKER_API_VERSION=1.23 gcloud docker -- push ${imageTag}"
-                    sh "DOCKER_API_VERSION=1.23 docker tag ${imageTag} ${baseImageTag}"
-                    sh "DOCKER_API_VERSION=1.23 gcloud docker -- push ${baseImageTag}"
                 }
 
                 stage('Deploy') {
