@@ -6,7 +6,12 @@ class NewIngredient extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {value: ''};
+        this.state = {name: '', type: { name: 'malt', displayName: 'Malt'}, url: ''};
+        this.ingredientTypes = {
+            'malt': { name: 'malt', displayName: 'Malt' },
+            'hops': { name: 'hops', displayName: 'Hops' },
+            'yeast': { name: 'yeast', displayName: 'Yeast' }
+        };
         this.getValidationState = this.getValidationState.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
@@ -24,7 +29,28 @@ class NewIngredient extends React.Component {
     }
 
     handleChange(e) {
-        this.setState({ value: e.target.value });
+        switch (e.target.id) {
+            case 'ingredientName':
+                this.setState({
+                    ...this.state,
+                    name: e.target.value 
+                });
+                break;
+            case 'ingredientType':
+                this.setState({ 
+                    ...this.state,
+                    type: this.ingredientTypes[e.target.value],
+                });
+                break;
+            case 'ingredientUrl':
+                this.setState({
+                    ...this.state,
+                    url: e.target.value 
+                });
+                break;
+            default:
+                alert(`Unknown form control: ${e.target.id}`);
+        }
     }
     
     render() {
@@ -54,10 +80,13 @@ class NewIngredient extends React.Component {
                             validationState={this.getValidationState('ingredientType')}
                         >
                             <ControlLabel>Ingredient Type</ControlLabel>
-                            <FormControl componentClass="select" placeholder="select">
-                                <option value="malt">Malt</option>
-                                <option value="hop">Hops</option>
-                                <option value="yeast">Yeast</option>
+                            <FormControl
+                                componentClass="select"
+                                placeholder="select"
+                                onChange={this.handleChange}>
+                                {Object.keys(this.ingredientTypes).map((keyName, keyIndex) => (
+                                    <option key={keyIndex} value={this.ingredientTypes[keyName].name}>{this.ingredientTypes[keyName].displayName}</option>
+                                ))}
                             </FormControl>
                         </FormGroup>
                         <FormGroup
@@ -68,9 +97,10 @@ class NewIngredient extends React.Component {
                             <FormControl 
                                 type="text"
                                 placeholder="Enter the manufacturer URL for the Ingredient."
+                                onChange={this.handleChange}
                             />
                         </FormGroup>
-                        <Button type="submit">
+                        <Button onClick={() => this.props.submit(this.state)}>
                             Submit
                         </Button>
                     </form>

@@ -19,7 +19,14 @@ exports[`Ingredients component matches the snapshot 1`] = `
         </th>
         <th
           className="center"
-        />
+        >
+          URL
+        </th>
+        <th
+          className="center"
+        >
+          Admin Actions
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -30,7 +37,19 @@ exports[`Ingredients component matches the snapshot 1`] = `
         <td>
           Malt
         </td>
-        <td>
+        <td
+          className="center"
+        >
+          <a
+            href="https://www.weyermann.de/eng/gelbe_seiten_en.asp?snr=1&idkat=1013&umenue=yes&idmenue=37&sprache=2"
+            target="_blank"
+          >
+            URL
+          </a>
+        </td>
+        <td
+          className="right"
+        >
           <button
             className="btn btn-primary"
             disabled={false}
