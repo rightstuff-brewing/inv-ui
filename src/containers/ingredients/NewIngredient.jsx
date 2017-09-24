@@ -11,8 +11,16 @@ class NewIngredient extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    getValidationState() {
-        return 'success';
+    getValidationState(controlId) {
+        if (controlId === 'ingredientName') {
+            return 'success';
+        }
+        else if (controlId === 'ingredientType') {
+            return 'success';
+        }
+        else if (controlId === 'ingredientUrl') {
+            return 'success';
+        }
     }
 
     handleChange(e) {
@@ -28,18 +36,39 @@ class NewIngredient extends React.Component {
                 <Modal.Body>
                     <form>
                         <FormGroup
-                            controlId="formBasicText"
-                            validationState={this.getValidationState()}
+                            controlId="ingredientName"
+                            validationState={this.getValidationState('ingredientName')}
                         >
                             <ControlLabel>Ingredient Name</ControlLabel>
                             <FormControl
                                 type="text"
                                 value={this.state.value}
-                                placeholder="Enter text"
+                                placeholder="Enter the name of the ingredient"
                                 onChange={this.handleChange}
                             />
                             <FormControl.Feedback />
                             <HelpBlock>The name of the ingredient.</HelpBlock>
+                        </FormGroup>
+                        <FormGroup
+                            controlId="ingredientType"
+                            validationState={this.getValidationState('ingredientType')}
+                        >
+                            <ControlLabel>Ingredient Type</ControlLabel>
+                            <FormControl componentClass="select" placeholder="select">
+                                <option value="malt">Malt</option>
+                                <option value="hop">Hops</option>
+                                <option value="yeast">Yeast</option>
+                            </FormControl>
+                        </FormGroup>
+                        <FormGroup
+                            controlId="ingredientUrl"
+                            validationState={this.getValidationState('ingredientUrl')}
+                        >
+                            <ControlLabel>Ingredient Source Url</ControlLabel>
+                            <FormControl 
+                                type="text"
+                                placeholder="Enter the manufacturer URL for the Ingredient."
+                            />
                         </FormGroup>
                         <Button type="submit">
                             Submit
