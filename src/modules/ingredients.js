@@ -20,11 +20,6 @@ if (process.env.NODE_ENV === 'development') {
 // Initial state. 
 const initialState = {
   ingredients: [
-    {
-      name: 'Crisp Malt Wheat',
-      type: { name: 'malt', displayName: 'Malt' },
-      url: 'https://www.weyermann.de/eng/gelbe_seiten_en.asp?snr=1&idkat=1013&umenue=yes&idmenue=37&sprache=2'
-    }
   ]
 };
 
