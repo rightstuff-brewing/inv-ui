@@ -16,7 +16,8 @@ podTemplate(cloud: 'local cluster', label: 'node-k8s',
 
             ansiColor('xterm') {
                 stage('Install dependencies') {
-                    sh 'npm install'
+                    sh 'npm install -g yarn'
+                    sh 'yarn'
                 }
 
                 stage('Build') {
