@@ -27,6 +27,7 @@ class Ingredients extends React.Component {
                         <tr>
                             <th className="center">Ingredient</th>
                             <th className="center">Type</th>
+                            <th className="center">URL</th>
                             <th className="center"></th>
                         </tr>
                     </thead>
@@ -34,7 +35,10 @@ class Ingredients extends React.Component {
                         <tr>
                             <td>Crisp Malt Wheat</td>
                             <td>Malt</td>
-                            <td>
+                            <td className="center">
+                                <a href="https://www.weyermann.de/eng/gelbe_seiten_en.asp?snr=1&idkat=1013&umenue=yes&idmenue=37&sprache=2">URL</a>
+                            </td>
+                            <td className="right">
                                 <Button bsStyle="primary">Edit</Button>
                                 <Button bsStyle="danger">Delete</Button>
                             </td>
