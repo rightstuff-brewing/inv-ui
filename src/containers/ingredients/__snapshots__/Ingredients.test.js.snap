@@ -29,44 +29,7 @@ exports[`Ingredients component matches the snapshot 1`] = `
         </th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <td>
-          Crisp Malt Wheat
-        </td>
-        <td>
-          Malt
-        </td>
-        <td
-          className="center"
-        >
-          <a
-            href="https://www.weyermann.de/eng/gelbe_seiten_en.asp?snr=1&idkat=1013&umenue=yes&idmenue=37&sprache=2"
-            target="_blank"
-          >
-            URL
-          </a>
-        </td>
-        <td
-          className="right"
-        >
-          <button
-            className="btn btn-primary"
-            disabled={false}
-            type="button"
-          >
-            Edit
-          </button>
-          <button
-            className="btn btn-danger"
-            disabled={false}
-            type="button"
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-    </tbody>
+    <tbody />
   </table>
   <br />
   <button
