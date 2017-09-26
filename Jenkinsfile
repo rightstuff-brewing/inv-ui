@@ -1,7 +1,7 @@
 def projectName = 'rightstuff-176212';
 def imageName = "gcr.io/${projectName}/jenkins-slave:node.master";
 def feSvcName = "inv-frontend"
-def baseImageTag = "gcr.io/${projectName}/inv-ui:${env.BRANCH_NAME.replace("/", "-")}"
+def baseImageTag = "gcr.io/${projectName}/inv-ui:${env.BRANCH_NAME.replace("/", "-").replace("#", "")}"
 def imageTag = "${baseImageTag}.${env.BUILD_NUMBER}"
 
 podTemplate(cloud: 'local cluster', label: 'node-k8s', 
