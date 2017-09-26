@@ -1,7 +1,8 @@
 def projectName = 'rightstuff-176212';
 def imageName = "gcr.io/${projectName}/jenkins-slave:node.master";
 def feSvcName = "inv-frontend"
-def baseImageTag = "gcr.io/${projectName}/inv-ui:${env.BRANCH_NAME.replace("/", "-").replace("#", "")}"
+def sanitizedBranchName = env.BRANCH_NAME.replace("/", "-").replace("#", "")
+def baseImageTag = "gcr.io/${projectName}/inv-ui:${sanitizedBranchName}"
 def imageTag = "${baseImageTag}.${env.BUILD_NUMBER}"
 
 podTemplate(cloud: 'local cluster', label: 'node-k8s', 
@@ -63,14 +64,14 @@ podTemplate(cloud: 'local cluster', label: 'node-k8s',
                             break
                         default:
                             // Create namespace if it doesn't exist
-                            sh "kubectl get ns ${env.BRANCH_NAME} || kubectl create ns ${env.BRANCH_NAME}"
+                            sh "kubectl get ns ${sanitizedBranchName} || kubectl create ns ${sanitizedBranchName}"
                             // Don't use public load balancing for development branches
                             sh "sed -i.bak 's#LoadBalancer#ClusterIP#' ./k8s/services/frontend.yaml"
                             sh "sed -i.bak 's#gcr.io/${projectName}/inv-ui:1.0.0#${imageTag}#' ./k8s/develop/*.yaml"
-                            sh("kubectl --namespace=${env.BRANCH_NAME} apply -f k8s/services/")
-                            sh("kubectl --namespace=${env.BRANCH_NAME} apply -f k8s/develop/")
+                            sh("kubectl --namespace=${sanitizedBranchName} apply -f k8s/services/")
+                            sh("kubectl --namespace=${sanitizedBranchName} apply -f k8s/develop/")
                             echo 'To access your environment run `kubectl proxy`'
-                            echo "Then access your service via http://localhost:8001/api/v1/proxy/namespaces/${env.BRANCH_NAME}/services/${feSvcName}:80/"
+                            echo "Then access your service via http://localhost:8001/api/v1/proxy/namespaces/${sanitizedBranchName}/services/${feSvcName}:80/"
                             break
                     }
                 }
