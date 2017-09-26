@@ -3,10 +3,6 @@
 [![Stories in To Do](https://badge.waffle.io/rightstuff-brewing/inv-ui.svg?label=to%20do&title=To%20Do)](http://waffle.io/rightstuff-brewing/inv-ui)
 [![Stories in In Progress](https://badge.waffle.io/rightstuff-brewing/inv-ui.svg?label=in%20progress&title=In%20Progress)](http://waffle.io/rightstuff-brewing/inv-ui)
 
-
-[![Master Build Status](http://jenkins.rightstuffbrewing.com/job/rightstuff-brewing/job/inv-ui/job/master/badge/icon)](http://jenkins.rightstuffbrewing.com/job/rightstuff-brewing/job/inv-ui/job/master/)
-[![Develop Build Status](http://jenkins.rightstuffbrewing.com/job/rightstuff-brewing/job/inv-ui/job/develop/badge/icon)](http://jenkins.rightstuffbrewing.com/job/rightstuff-brewing/job/inv-ui/job/develop/)
-
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
