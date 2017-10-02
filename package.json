@@ -24,10 +24,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "test:ci": "react-scripts test --env=jsdom --testResultsProcessor ./node_modules/jest-junit --coverage --coverageDirectory=test/coverage",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:dev": "run-p start test"
   },
   "devDependencies": {
-    "jest-junit": "^3.0.0"
+    "jest-junit": "^3.0.0",
+    "npm-run-all": "^4.1.1"
   },
   "jest": {
     "coverageReporters": [
