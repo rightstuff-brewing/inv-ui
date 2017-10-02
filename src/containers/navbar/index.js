@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 export default () => (
   <div>
-    <Navbar>
+    <Navbar fluid={true}>
       <Navbar.Header>
         <Navbar.Brand>
           <Link to="/">Right Stuff Brewing</Link>

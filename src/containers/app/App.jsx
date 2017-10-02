@@ -4,7 +4,7 @@ import Routes from '../routes';
 import Navbar from '../navbar';
 
 const App = () => (
-  <Grid>
+  <Grid fluid={true}>
     <Row className="show-grid">
       <Col md={12}>
         <header>
